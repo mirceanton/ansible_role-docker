@@ -3,8 +3,17 @@
 
 - name: Verify
   hosts: all
-  gather_facts: false
+  gather_facts: true
+
+  vars_files:
+    - ../../defaults/main.yml
+
+  pre_tasks:
+    - name: Check packages
+      package_facts:
+        manager: auto
+
   tasks:
-  - name: Example assertion
-    ansible.builtin.assert:
-      that: true
+    - name: Check if apt packages are installed
+      ansible.builtin.assert:
+        that: "'{{ docker_package }}' in ansible_facts.packages"
