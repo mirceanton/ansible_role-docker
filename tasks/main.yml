@@ -3,6 +3,8 @@
   ansible.builtin.apt:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"
+    update_cache: true
+    cache_valid_time: 3600
 
 - name: Add users to docker group
   ansible.builtin.user:
