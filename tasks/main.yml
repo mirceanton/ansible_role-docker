@@ -1,2 +1,15 @@
 ---
-# tasks file for docker
+- name: Install the docker apt package
+  ansible.builtin.apt:
+    name: "{{ docker_package }}"
+    state: "{{ docker_package_state }}"
+
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: "{{ docker_group }}"
+    append: true
+  loop: "{{ docker_users }}"
+  when:
+    - docker_users is defined
+    - docker_users | length > 0
