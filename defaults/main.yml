@@ -7,3 +7,9 @@ docker_package_state: present
 
 # The name of the docker group
 docker_group: docker
+
+# The name of the apt package to install
+docker_compose_package: docker-compose
+
+# The state of the apt package to install
+docker_compose_package_state: present
