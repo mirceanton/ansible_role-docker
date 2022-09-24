@@ -18,13 +18,13 @@
       ansible.builtin.assert:
         that: "'{{ item }}' in ansible_facts.packages"
       loop:
-        - "docker"
-        - "docker-compose"
+        - "{{ docker_package }}"
+        - "{{ docker_compose_package }}"
 
     - name: Check if commands are working
       ansible.builtin.command: "{{ item }} --version"
       register: __command__
       changed_when: false
       loop:
-        - "{{ docker_package }}"
-        - "{{ docker_compose_package }}"
+        - "docker"
+        - "docker-compose"
