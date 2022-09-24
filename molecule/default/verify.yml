@@ -21,20 +21,16 @@
         - "{{ docker_package }}"
         - "{{ docker_compose_package }}"
 
-    - name: Try running `docker --version`
-      ansible.builtin.command: "{{ docker_package }} --version"
-      register: __command__
-      changed_when: false
+    - name: Check if commands are working
+      block:
+        - name: Try running ansible
+          ansible.builtin.command: "{{ item }} --version"
+          register: __command__
+          changed_when: false
 
-    - name: Check command output
-      ansible.builtin.assert:
-        that: __command__.rc == 0
-
-    - name: Try running `docker-compose --version`
-      ansible.builtin.command: "{{ docker_compose_package }} --version"
-      register: __command__
-      changed_when: false
-
-    - name: Check command output
-      ansible.builtin.assert:
-        that: __command__.rc == 0
+        - name: Check command output
+          ansible.builtin.assert:
+            that: __command__.rc == 0
+      loop:
+        - "{{ docker_package }}"
+        - "{{ docker_compose_package }}"
