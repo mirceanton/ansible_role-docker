@@ -1,0 +1,22 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: true
+
+  vars_files:
+    - ../../defaults/main.yml
+
+  pre_tasks:
+    - name: Check packages
+      package_facts:
+        manager: auto
+
+  tasks:
+    - name: Check if apt packages are installed
+      ansible.builtin.assert:
+        that: "'{{ item }}' in ansible_facts.packages"
+      loop:
+        - "{{ docker_package }}"
+        - "{{ docker_compose_package }}"
