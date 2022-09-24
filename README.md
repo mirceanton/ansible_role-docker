@@ -14,7 +14,7 @@ Role Variables
 |         Variable         |     Type     | Default |                 Description                 |
 | :----------------------: | :----------: | :-----: | :-----------------------------------------: |
 |      `docker_users`      | list(string) |  `[]`   | List of users to add to the `docker` group. |
-| `install_docker_compose` |     bool     | `true`  | Whether or not to install `docker-compose`  |
+| `docker_compose_install` |     bool     | `true`  | Whether or not to install `docker-compose`  |
 
 To check the default variables, take a look at the [defaults](defaults/main.yml) file.
 
