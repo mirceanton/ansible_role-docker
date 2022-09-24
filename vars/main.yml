@@ -3,4 +3,4 @@
 docker_users: []
 
 # Whether or not to install docker-compose
-install_docker_compose: true
+docker_compose_install: true
