@@ -16,4 +16,7 @@
   tasks:
     - name: Check if apt packages are installed
       ansible.builtin.assert:
-        that: "'{{ docker_package }}' in ansible_facts.packages"
+        that: "'{{ item }}' in ansible_facts.packages"
+      loop:
+        - "{{ docker_package }}"
+        - "{{ docker_compose_package }}"
